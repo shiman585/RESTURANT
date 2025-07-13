@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Delivery Information - EasyEat</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="shortcut icon" href="IMAGES/LOGO.png" type="image/x-icon">
+  <style>
+    :root {
+      --primary: #ff0000;
+      --primary-light: #ff4d4d;
+      --secondary: #121212;
+      --secondary-light: #1e1e1e;
+      --accent: #000000;
+      --text: #ffffff;
+      --text-light: #b3b3b3;
+      --border: #333333;
+      --border-light: #444444;
+      --card-bg: #1a1a1a;
+      --success: #28a745;
+      --danger: #dc3545;
+    }
+
+    body {
+      background-color: black;
+      font-family: 'Segoe UI', sans-serif;
+      color: var(--text);
+      min-height: 100vh;
+      padding-bottom: 20px;
+    }
+
+    .checkout-header {
+      background-color: var(--accent);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      padding: 18px 0;
+      margin-bottom: 25px;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .checkout-container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 0 20px;
+    }
+
+    .checkout-card {
+      background-color: black;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      padding: 25px;
+      margin-bottom: 25px;
+      border: 1px solid white;
+    }
+
+    .card-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: var(--primary);
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+    }
+
+    .card-title i {
+      margin-right: 10px;
+      color: var(--primary);
+    }
+
+    .form-control {
+      background-color: var(--secondary-light);
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: 6px;
+      padding: 10px 15px;
+      font-size: 0.95rem;
+    }
+
+    .form-control:focus {
+      border-color: var(--primary-light);
+      box-shadow: 0 0 0 0.2rem rgba(255, 0, 0, 0.1);
+    }
+
+    .form-label {
+      font-weight: 500;
+      font-size: 0.9rem;
+      color: var(--text-light);
+      margin-bottom: 8px;
+    }
+
+    .required { color: var(--danger); }
+
+    .btn-checkout {
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      padding: 12px 0;
+      font-weight: 600;
+      border-radius: 6px;
+      font-size: 1rem;
+      transition: 0.2s;
+    }
+
+    .btn-checkout:hover {
+      background-color: var(--primary-light);
+    }
+
+    .checkout-steps {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 30px;
+      position: relative;
+    }
+
+    .checkout-steps::before {
+      content: '';
+      position: absolute;
+      top: 15px;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background-color: var(--border);
+    }
+
+    .step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+
+    .step-number {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background-color: var(--border);
+      color: var(--text-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .step.active .step-number { background-color: var(--primary); color: white; }
+    .step-label { font-size: 0.85rem; color: var(--text-light); font-weight: 500; text-align: center; }
+    .step.active .step-label { color: var(--primary); font-weight: 600; }
+
+    .cart-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+      gap: 15px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 12px;
+    }
+
+    .cart-item-img {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 6px;
+      border: 1px solid var(--border-light);
+    }
+ .checkout-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: red;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+        }
+    .summary-row, .summary-total {
+      display: flex;
+      justify-content: space-between;
+      margin: 8px 0;
+    }
+
+    .summary-total {
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+
+    @media (max-width: 991.98px) {
+      .col-lg-5 { order: -1; }
+      #continueToPaymentBtn { margin-bottom: 30px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="checkout-header">
+    <div class="checkout-container d-flex justify-content-between align-items-center">
+      <a href="javascript:history.back()" class="btn btn-outline-danger rounded-circle">
+        <i class="fas fa-arrow-left"></i>
+      </a>
+      <a class="navbar-brand" href="index.html">
+        <img src="IMAGES/LOGO.png"  alt="EasyEat Logo" height="40">
+      </a>
+    </div>
+  </header >
+
+  <div class="checkout-container">
+    <div class="checkout-steps">
+      <div class="step active">
+        <div class="step-number">1</div>
+        <div class="step-label">Delivery</div>
+      </div>
+      <div class="step"><div class="step-number">2</div><div class="step-label">Payment</div></div>
+      <div class="step"><div class="step-number">3</div><div class="step-label">Confirmation</div></div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-7">
+        <div class="checkout-card">
+          <h2 class="card-title"><i class="fas fa-truck"></i> Delivery Information</h2>
+          <form id="deliveryForm" novalidate>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label">First Name <span class="required">*</span></label>
+                <input type="text" class="form-control" id="firstName" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Last Name <span class="required">*</span></label>
+                <input type="text" class="form-control" id="lastName" required>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Address <span class="required">*</span></label>
+              <input type="text" class="form-control" id="address" required>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label">City <span class="required">*</span></label>
+                <input type="text" class="form-control" id="city" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Phone <span class="required">*</span></label>
+                <input type="tel" class="form-control" id="phone" pattern="[0-9]{10,15}" required>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Delivery Instructions</label>
+              <textarea class="form-control" rows="3" id="instructions"></textarea>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="col-lg-5 mb-4 mb-lg-0">
+        <div class="checkout-card">
+          <h2 class="card-title"><i class="fas fa-receipt"></i> Order Summary</h2>
+          <div id="orderItemsContainer" style="max-height: 300px; overflow-y: auto;"></div>
+          <div class="order-summary">
+            <div class="summary-row"><span>Subtotal:</span><span id="subtotal">$0.00</span></div>
+            <div class="summary-row"><span>Delivery Fee:</span><span>$2.99</span></div>
+            <div class="summary-row"><span>Tax (10%):</span><span id="tax">$0.00</span></div>
+            <div class="summary-total"><span>Total:</span><span id="total">$0.00</span></div>
+          </div>
+  
+
+<button id="continueToPaymentBtn" type="button" class="btn btn-checkout w-100 mt-3 d-block text-center text-white text-decoration-none">
+  Continue to Payment
+</button>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+  <script>
+  function loadCartItems() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const container = document.getElementById('orderItemsContainer');
+    let subtotal = 0;
+
+    if (cart.length === 0) {
+      container.innerHTML = `<div class="text-center py-4"><i class="fas fa-shopping-cart fa-2"></i><p>Your cart is empty</p><a href="index.html" class="btn btn-sm btn-outline-danger">Browse Menu</a></div>`;
+      document.getElementById('continueToPaymentBtn').disabled = true;
+      return;
+    }
+
+    container.innerHTML = '';
+    cart.forEach(item => {
+      const itemTotal = item.price * item.quantity;
+      subtotal += itemTotal;
+
+      const itemElement = document.createElement('div');
+      itemElement.className = 'cart-item';
+      itemElement.innerHTML = `
+        <img src="${item.img}" class="cart-item-img" alt="${item.title}">
+        <div class="flex-grow-1">
+          <h6 class="mb-1">${item.title}</h6>
+          <p class="">$${item.price.toFixed(2)} × ${item.quantity}</p>
+          <p class="mb-0 fw-bold">$${itemTotal.toFixed(2)}</p>
+        </div>
+      `;
+      container.appendChild(itemElement);
+    });
+
+    document.getElementById('subtotal').textContent = `$${subtotal.toFixed(2)}`;
+    document.getElementById('tax').textContent = `$${(subtotal * 0.1).toFixed(2)}`;
+    document.getElementById('total').textContent = `$${(subtotal + 2.99 + subtotal * 0.1).toFixed(2)}`;
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    loadCartItems();
+
+    const btn = document.getElementById('continueToPaymentBtn');
+    const form = document.getElementById('deliveryForm');
+
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+
+      form.classList.remove('was-validated');
+
+      if (!form.checkValidity()) {
+        form.classList.add('was-validated');
+        return;
+      }
+
+      const deliveryInfo = {
+        firstName: document.getElementById('firstName').value.trim(),
+        lastName: document.getElementById('lastName').value.trim(),
+        address: document.getElementById('address').value.trim(),
+        city: document.getElementById('city').value.trim(),
+        phone: document.getElementById('phone').value.trim(),
+        instructions: document.getElementById('instructions').value.trim()
+      };
+
+      localStorage.setItem('deliveryInfo', JSON.stringify(deliveryInfo));
+
+      window.location.href = 'cartpay.html';
+    });
+  });
+</script>
+
+</body>
+</html>
