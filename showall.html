@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALL PRODUCTS - Cart System</title>
+    <link rel="shortcut icon" href="IMAGES/LOGO.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <!-- Add AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        /* ROOT START */
+        :root {
+            --primary: black;
+            --accent: #ffc107;
+            --light: white;
+            --dark: #1a1a1a;
+        }
+        /* ROOT END */
+        
+        /* BODY START */
+        body {
+            background-color: var(--light);
+            padding-bottom: 70px;
+            background-color: black;
+            /* Custom scrollbar */
+            overflow-x: hidden;
+        }
+        
+        /* Custom scrollbar styles */
+        ::-webkit-scrollbar {
+            width: 3px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #000;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #ffc107;
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ffd700;
+        }
+        /* BODY END */
+        
+        /* NAVBAR START */
+        .a a:hover {
+            text-transform: uppercase;
+        } 
+        .nav-link {
+            color: var(--light) !important;
+            transition: all 0.3s ease;
+        }
+        .nav-link:hover {
+            color: var(--accent) !important;
+            text-transform: uppercase;
+        }
+        
+        /* Custom navbar toggler styles */
+        .navbar-toggler {
+            border: none;
+            padding: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-toggler:focus {
+            box-shadow: none;
+        }
+        
+        .navbar-toggler.collapsed {
+            background-color: transparent;
+        }
+        
+        .navbar-toggler:not(.collapsed) {
+            background-color: red !important;
+        }
+        
+        /* Offcanvas menu styles */
+        .offcanvas {
+            background-color: black;
+            color: white;
+        }
+        
+        .offcanvas-header {
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .offcanvas-body .nav-link {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        /* Mobile menu buttons */
+        .mobile-menu-buttons {
+            display: none;
+            padding: 1rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            margin-top: 1rem;
+        }
+        
+        .mobile-menu-buttons .btn {
+            width: 100%;
+            margin-bottom: 0.5rem;
+        }
+        
+        @media (max-width: 991.98px) {
+            .desktop-buttons {
+                display: none !important;
+            }
+            .mobile-menu-buttons {
+                display: block;
+            }
+        }
+        
+        /* NAVBAR ENDS */
+        
+        /* CARD STYLING */
+        .card {
+            border: 3px solid white;
+            border-radius: 15px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+            margin-top: 10px;
+            box-shadow: 0 0 10px 1px black;
+            text-align: center;
+            background-color: black;
+            color: white;
+            height: 550px;
+        }
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px 2px yellow;
+        }
+        
+        .btn {
+            background-color: black;
+            color: white;
+            border: 1px solid white;
+        }
+        .btn:hover{
+            background-color: yellow;
+            color: black;
+            border: 1px solid black;
+        }
+        
+        .btns {
+            background-color: black;
+            color: white;
+            height: 43px;
+            width: 70px;
+            border: 1px solid white;
+            border-radius: 10px;
+        }
+        
+        /* Pizza Heading Style */
+        .section-heading {
+            color: white;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 1.7rem;
+            font-family: system-ui;
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+        .section-heading span {
+            display: block;
+            width: 10%;
+            height: 3px;
+            background-color: #d0021b;
+            margin-top: 5px;
+        }
+        
+        /* Cart Icon */
+        .cart-icon {
+            position: relative;
+            margin-left: 15px;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -10px;
+            background-color: var(--accent);
+            color: var(--dark);
+            border-radius: 50%;
+            width: 22px;
+            height: 22px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+        
+        /* Cart Modal */
+        .cart-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            max-width: 450px;
+            height: 100vh;
+            background-color: black;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+            z-index: 1050; /* Higher than navbar */
+            overflow-y: auto;
+            padding: 20px;
+            transition: transform 0.3s ease;
+            color: white;
+            transform: translateX(100%);
+        }
+        .cart-modal.active {
+            display: block;
+            transform: translateX(0);
+        }
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 15px;
+            border-bottom: 2px solid white;
+            margin-bottom: 20px;
+        }
+        .close-cart {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: white;
+        }
+        .cart-item {
+            display: flex;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid white;
+        }
+        .cart-item-img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-right: 15px;
+        }
+        .cart-item-details {
+            flex: 1;
+            color: white;
+        }
+        .cart-item-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .cart-item-price {
+            color: white;
+            font-size: 0.9rem;
+        }
+        .cart-item-quantity {
+            display: flex;
+            align-items: center;
+            margin: 8px 0;
+            color: white;
+        }
+        .quantity-btn {
+            width: 25px;
+            height: 25px;
+            background-color: var(--primary);
+            color: white;
+            border: 1px solid white;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .quantity-value {
+            margin: 0 10px;
+            min-width: 20px;
+            text-align: center;
+            color: white;
+        }
+        .remove-item {
+            background: none;
+            border: none;
+            color: #ff0000;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+            font-weight: bold;
+            font-size: 1.2rem;
+            border-top: 2px solid white;
+            margin-top: 10px;
+            color: white;
+        }
+        .checkout-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: red;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+        }
+        .checkout-btn:hover {
+            background-color: gold;
+            color: black;
+        }
+        .empty-cart {
+            text-align: center;
+            padding: 10px 0;
+            color: white;
+        }
+        
+        /* FOOTER START */
+        .footer {
+            background-color: red;
+            color: white;
+            position: relative;
+            top: 100px;
+            overflow: hidden;
+        }
+
+        .footer::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background-color: red;
+        }
+
+        .footer a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: #ffc107;
+            text-decoration: underline;
+        }
+
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: red;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            background-color: #ffc107;
+            color: red !important;
+            transform: translateY(-3px);
+        }
+        /* FOOTER END */
+        
+        /* Notification */
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--primary);
+            color: var(--light);
+            padding: 12px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            display: none;
+            z-index: 2000;
+            animation: fadeInOut 3s ease-in-out;
+        }
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0; transform: translateY(20px); }
+            10%, 90% { opacity: 1; transform: translateY(0); }
+        }
+        .login{
+            background-color: black;
+            color: white;
+            height: 43px;
+            width: 70px;
+            border: 1px solid white;
+            border-radius: 5px;
+        }
+        .login:hover{
+            transition: .5s;
+            background-color: #ffc107;
+            color: white;
+        }
+    
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .card {
+                height: 350px !important;
+                padding-top: 10px !important;
+            }
+            .card img {
+                height: 140px;
+                object-fit: contain;
+            }
+            .card-title {
+                font-size: 1rem;
+            }
+            .card-text {
+                font-size: 0.9rem;
+            }
+            .btn {
+                font-size: 0.9rem;
+                padding: 6px 10px;
+            }
+            
+            /* Adjust offcanvas for mobile */
+            .offcanvas {
+                width: 75% !important;
+            }
+            
+            /* Full width cart on mobile */
+            @media (max-width: 450px) {
+                .cart-modal {
+                    width: 100%;
+                    max-width: 100%;
+                }
+            }
+        }
+    
+#cartItems {
+    max-height: 400px;
+    overflow-y: auto;
+    margin-bottom: 15px;
+
+    /* Small, neat scrollbar */
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: #555 transparent;
+}
+#cartItems::-webkit-scrollbar {
+    width: 4px;
+}
+#cartItems::-webkit-scrollbar-track {
+    background: transparent;
+}
+#cartItems::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 10px;
+}
+#cartItems::-webkit-scrollbar-thumb:hover {
+    background-color: #aaa;
+}
+
+</style>
+</head>
+<body>
+    <!-- Navbar Start -->
+    <nav class="navbar navbar-expand-lg navbar-dark position-sticky top-0" style="z-index: 2; background-color: red;">
+        <div class="container-fluid">
+            <div style="padding-right: 50px;" class="img">
+                <img src="IMAGES/LOGO.png" alt="Logo" height="60px">
+            </div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="a" class="nav-item"><a class="nav-link active" aria-current="page" href="index.html">Home</a></li>
+                    <li class="a" class="nav-item"><a class="nav-link text-white" href="about.html">About Us</a></li>
+                    <li class="a" class="nav-item"><a class="nav-link text-white" href="contact.html">Contact Us</a></li>
+                    <li class="a" class="nav-item"><a class="nav-link text-white" href="feedback.html">Feedback</a></li>
+                    <li class="a" class="nav-item"><a class="nav-link text-white" href="gallery.html">Gallery</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="showall.html">Show All</a>
+                    </li>
+                </ul>
+                <div class="desktop-buttons d-flex align-items-center">
+                    <!-- Cart Icon -->
+                    <div class="cart-icon" id="cartIcon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Offcanvas Sidebar Menu -->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+                <li class="nav-item"><a class="nav-link" href="contact.html">Contact Us</a></li>
+                <li class="nav-item"><a class="nav-link" href="feedback.html">Feedback</a></li>
+                <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+                <li class="nav-item"><a class="nav-link" href="showall.html">Show All</a></li>
+            </ul>
+            
+            <!-- Mobile Menu Buttons -->
+            <div class="mobile-menu-buttons">
+                <button class="btn" id="mobileCartButton">
+                    <i class="fas fa-shopping-cart me-2"></i> Cart 
+                    <span class="badge bg-warning text-dark ms-2" id="mobileCartCount">0</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- Navbar End -->
+
+    <!-- Cards Data Start -->
+    <div class="container">
+        <!-- Section 1 -->
+        <div class="row">
+            <div class="col-12">
+                <h1 id="pizzaHeading" style="color: white; font-weight: bold; text-transform: uppercase; font-size: 1.7rem; font-family: system-ui;" data-aos="fade-right" data-aos-once="false">
+                    Pizza
+                    <span style="display:block; width:10%; height:3px; background-color:#d0021b; margin-top:5px;"></span>
+                </h1>
+            </div>
+        </div>
+        <div class="row" id="section1">
+            <!-- First 9 cards will be inserted here by JavaScript -->
+        </div>
+
+        <!-- Section 2 -->
+        <div class="row">
+            <div class="col-12">
+                <h1 id="burgerHeading" style="color: white; font-weight: bold; text-transform: uppercase; font-size: 1.7rem; font-family: system-ui;" data-aos="fade-right" data-aos-once="false">
+                    Burger
+                    <span style="display:block; width:10%; height:3px; background-color:#d0021b; margin-top:5px;"></span>
+                </h1>
+            </div>
+        </div>
+        <div class="row" id="section2">
+            <!-- Next 9 cards will be inserted here by JavaScript -->
+        </div>
+
+        <!-- Section 3 -->
+        <div class="row">
+            <div class="col-12">
+                <h1 id="fish&saladHeading" style="color: white; font-weight: bold; text-transform: uppercase; font-size: 1.7rem; font-family: system-ui;" data-aos="fade-right" data-aos-once="false">
+                    Fish & Salad
+                    <span style="display:block; width:10%; height:3px; background-color:#d0021b; margin-top:5px;"></span>
+                </h1>
+            </div>
+        </div>
+        <div class="row" id="section3">
+            <!-- Next 9 cards will be inserted here by JavaScript -->
+        </div>
+
+        <!-- Section 4 -->
+        <div class="row">
+            <div class="col-12">
+                <h1 id="dessertHeading" style="color: white; font-weight: bold; text-transform: uppercase; font-size: 1.7rem; font-family: system-ui;" data-aos="fade-right" data-aos-once="false">
+                    Dessert
+                    <span style="display:block; width:10%; height:3px; background-color:#d0021b; margin-top:5px;"></span>
+                </h1>
+            </div>
+        </div>
+        <div class="row" id="section4">
+            <!-- Last 9 cards will be inserted here by JavaScript -->
+        </div>
+    </div>
+    <!-- Cards Data End -->
+
+    <!-- Cart Modal -->
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-header">
+            <h3>Your Cart</h3>
+            <button class="close-cart" id="closeCart">&times;</button>
+        </div>
+        <div id="cartItems">
+            <!-- Cart items will be inserted here -->
+        </div>
+        <div class="cart-total">
+            <span>Total:</span>
+            <span id="cartTotal">$0.00</span>
+        </div>
+        <button class="checkout-btn" onclick="window.location.href='a.html'">
+  Proceed to Checkout
+</button>
+
+    </div>
+    
+    <!-- Notification -->
+    <div class="notification" id="notification">Item added to cart!</div>
+
+    <!-- FOOTER START -->
+    <footer class="footer" style="background-color: red;">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-md-4 text-center text-md-start mb-4 mb-md-0">
+                    <img src="IMAGES/LOGO.png" alt="Logo" height="80px">
+                    <p class="mt-3" style="font-size: 0.9rem;">Delicious food made with passion and tradition.</p>
+                </div>
+                
+                <div class="col-md-4 text-center mb-4 mb-md-0">
+                    <h5 class="mb-4" style="color: #ffc107;">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="index.html" class="text-white text-decoration-none">Home</a></li>
+                        <li class="mb-2"><a href="about.html" class="text-white text-decoration-none">About Us</a></li>
+                        <li class="mb-2"><a href="gallery.html" class="text-white text-decoration-none">Gallery</a></li>
+                        <li class="mb-2"><a href="contact.html" class="text-white text-decoration-none">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-md-4 text-center text-md-end">
+                    <h5 class="mb-4" style="color: #ffc107;">Connect With Us</h5>
+                    <div class="contact-info">
+                        <p class="mb-3">
+                            <i class="fas fa-phone me-2 text-white"></i> 
+                            <a href="tel:+1234567890" class="text-white text-decoration-none">+123 456 7890</a>
+                        </p>
+                        <p class="mb-4">
+                            <i class="fas fa-envelope me-2 text-white"></i> 
+                            <a href="mailto:info@easyeat.com" class="text-white text-decoration-none">info@easyeat.com</a>
+                        </p>
+                    </div>
+                </div>
+            
+                <hr class="my-4" style="border-color: black;">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <p class="mb-0" style="font-size: 0.8rem;">
+                            &copy; 2025 easyeat.com | All Rights Reserved | 
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- FOOTER END -->
+    <script>
+        const products = [
+            { img: "IMAGES/1.png", title: "FUNGI PIZZA", price: 20 },
+            { img: "IMAGES/2.png", title: "MARINARA PIZZA", price: 30 },
+            { img: "IMAGES/3.png", title: "MARGHERITA PIZZA", price: 15 },
+            { img: "IMAGES/5.png", title: "ITALIAN PIZZA ", price: 19 },
+            { img: "IMAGES/6.png", title: "MILANESE PIZZA", price: 19 },
+            { img: "IMAGES/9.png", title: "NEAPOLTAN PIZZA", price: 20 },
+            { img: "IMAGES/pizza 7.png", title: "SPICYSALAMI PIZZA", price:18 },
+            { img: "IMAGES/pizza 8.png", title: "SICILIAN PIZZA", price: 16 },
+            { img: "IMAGES/pizza 9.png", title: "SUMPREME PIZZA", price: 20 },
+            { img: "IMAGES/4.png", title: "HAM BURGER", price: 25 },
+            { img: "IMAGES/7.png", title: "BLACK BURGER", price: 30 },
+            { img: "IMAGES/burger 3.png", title: "CHEESE BURGER", price: 15 },
+            { img: "IMAGES/burger 4.png", title: "TOFU BURGER", price: 20 },
+            { img: "IMAGES/burger 5.png", title: "BEEF BURGER", price: 20 },
+            { img: "IMAGES/burger 6.png", title: "CLASSIC BURGER", price: 22 },
+            { img: "IMAGES/burger 7.webp", title: "ZINGER BURGER", price: 15 },
+            { img: "IMAGES/burger 8.png", title: "MONSTER BURGER", price: 30 },
+            { img: "IMAGES/burger 9.png", title: "CHICKEN BURGER", price: 2 },
+            { img: "IMAGES/fish 1.png", title: "GRILLED SALMON", price: 20 },
+            { img: "IMAGES/fish 2.png", title: "WHITING BATTERED", price: 15 },
+            { img: "IMAGES/fish 3.png", title: "DEEPFRY FISH", price: 15 },
+            { img: "IMAGES/PRO 10 WEEPING TIGER.png", title: "WEEPING TIGER", price: 25 },
+            { img: "IMAGES/PRO 11 FISH SALAD.png", title: "FISH SALAD", price: 35 },
+            { img: "IMAGES/PRO 12 GREEN CURRY.png", title: "GREEN CURRY", price: 40 },
+            { img: "IMAGES/fish 7.png", title: "SALMON WITH SALAD", price: 20 },
+            { img: "IMAGES/fish 8.png", title: "FISH PLATE", price: 15 },
+            { img: "IMAGES/dessert 1.png", title: "CREAM CUPCAKE ", price: 5 },
+            { img: "IMAGES/dessert 2.png", title: "BROWNE SLICE", price: 5 },
+            { img: "IMAGES/dessert 3.png", title: "CHOCOLATE MOUSSE", price: 10 },
+            { img: "IMAGES/dessert 4.png", title: "CHOCOLATE BALLS", price: 10 },
+            { img: "IMAGES/dessert 5.png", title: "STAWBERRY CAKE SLICE", price: 5 },
+            { img: "IMAGES/dessert 6.png", title: "CAKES BAR", price: 12 },
+            { img: "IMAGES/dessert 7.png", title: "CHOCOLATE CUPCAKE", price: 5 },
+            { img: "IMAGES/dessert 8.png", title: "ROLL CAkE", price: 5 },
+            { img: "IMAGES/dessert 9.png", title: "JALABI", price: 6 }
+        ];
+        
+        let cart = [];
+        const cartIcon = document.getElementById('cartIcon');
+        const cartModal = document.getElementById('cartModal');
+        const closeCart = document.getElementById('closeCart');
+        const cartItems = document.getElementById('cartItems');
+        const cartCount = document.getElementById('cartCount');
+        const mobileCartCount = document.getElementById('mobileCartCount');
+        const cartTotal = document.getElementById('cartTotal');
+        const notification = document.getElementById('notification');
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', () => {
+            initCart();
+            renderProducts();
+            // Initialize AOS with animations repeating on scroll
+            AOS.init({
+                duration: 1000,
+                easing: 'ease-in-out',
+                once: false,
+                mirror: true
+            });
+            
+            // Add event listeners after DOM is loaded
+            setupEventListeners();
+        });
+
+        function setupEventListeners() {
+            // Cart icon click
+            if (cartIcon) {
+                cartIcon.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    toggleCart();
+                });
+            }
+            
+            // Mobile cart button click
+            const mobileCartButton = document.getElementById('mobileCartButton');
+            if (mobileCartButton) {
+                mobileCartButton.addEventListener('click', function(e) {
+                    e.stopPropagation(); // Prevent event bubbling
+                    
+                    // Close the offcanvas menu first
+                    const offcanvas = bootstrap.Offcanvas.getInstance(document.getElementById('offcanvasNavbar'));
+                    if (offcanvas) {
+                        offcanvas.hide();
+                    }
+                    
+                    // Open cart after a small delay to ensure menu is closed
+                    setTimeout(() => {
+                        cartModal.classList.add('active');
+                        document.body.style.overflow = 'hidden';
+                    }, 100);
+                });
+            }
+            
+            // Close cart button
+            if (closeCart) {
+                closeCart.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    toggleCart();
+                });
+            }
+            
+            // Close cart when clicking outside
+            document.addEventListener('click', (e) => {
+                if (cartModal.classList.contains('active') && 
+                    !cartModal.contains(e.target) && 
+                    !e.target.closest('.cart-icon') && 
+                    !e.target.closest('#mobileCartButton')) {
+                    toggleCart();
+                }
+            });
+            
+            // Prevent cart modal from closing when clicking inside it
+            cartModal.addEventListener('click', (e) => {
+                e.stopPropagation();
+            });
+        }
+
+        function toggleCart() {
+            cartModal.classList.toggle('active');
+            // Prevent scrolling when cart is open
+            if (cartModal.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
+        }
+
+        function initCart() {
+            const saved = localStorage.getItem('cart');
+            if (saved) {
+                cart = JSON.parse(saved);
+                updateCartUI();
+            }
+        }
+
+        function renderProducts() {
+            const groupSize = 9;
+            const totalGroups = Math.ceil(products.length / groupSize);
+
+            for (let i = 0; i < totalGroups; i++) {
+                const sectionId = "section" + (i+1);
+                const section = document.getElementById(sectionId);
+                const start = i * groupSize;
+                const end = start + groupSize;
+                const groupProducts = products.slice(start, end);
+
+                groupProducts.forEach((product, index) => {
+                    const productIndex = start + index;
+                    section.innerHTML += `
+                        <div class="col-6 col-sm-6 col-md-4 mb-4" data-aos="fade-up" data-aos-delay="${index * 50}" data-aos-once="false">
+                            <div class="card">
+                                <img src="${product.img}" class="card-img-top" alt="${product.title}">
+                                <div class="card-body">
+                                    <h5 class="card-title">${product.title}</h5>
+                                    <p class="card-text">PRICE $${product.price}</p>
+                                    <button class="btn add-to-cart" data-id="${productIndex}">Add To Cart</button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+            
+            // Add event listeners to all add-to-cart buttons
+            document.querySelectorAll('.add-to-cart').forEach(button => {
+                button.addEventListener('click', function() {
+                    const productId = parseInt(this.getAttribute('data-id'));
+                    addToCart(productId);
+                });
+            });
+        }
+
+        function addToCart(index) {
+            const product = products[index];
+            const existing = cart.find(item => item.id === index);
+            
+            if (existing) {
+                existing.quantity += 1;
+            } else {
+                cart.push({ 
+                    id: index, 
+                    title: product.title, 
+                    price: product.price, 
+                    img: product.img, 
+                    quantity: 1 
+                });
+            }
+            
+            saveCart();
+            updateCartUI();
+            showNotification(`✅ ${product.title} added to cart`);
+        }
+
+        function saveCart() {
+            localStorage.setItem('cart', JSON.stringify(cart));
+        }
+
+        function updateCartUI() {
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartCount.textContent = totalItems;
+            mobileCartCount.textContent = totalItems;
+
+            cartItems.innerHTML = '';
+            if (cart.length === 0) {
+                cartItems.innerHTML = `
+                    <div class="empty-cart">
+                        <i class="fas fa-shopping-cart fa-3x mb-3"></i>
+                        <h4>Your cart is empty</h4>
+                        <p>Add some delicious items!</p>
+                    </div>`;
+                cartTotal.textContent = '$0.00';
+                return;
+            }
+
+            let total = 0;
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                const div = document.createElement('div');
+                div.className = 'cart-item';
+                div.innerHTML = `
+                    <img src="${item.img}" alt="${item.title}" class="cart-item-img">
+                    <div class="cart-item-details">
+                        <div class="cart-item-title">${item.title}</div>
+                        <div class="cart-item-price">$${item.price.toFixed(2)}</div>
+                        <div class="cart-item-quantity">
+                            <button class="quantity-btn" onclick="updateQuantity(${item.id}, -1)">-</button>
+                            <span class="quantity-value">${item.quantity}</span>
+                            <button class="quantity-btn" onclick="updateQuantity(${item.id}, 1)">+</button>
+                        </div>
+                        <button class="remove-item" onclick="removeItem(${item.id})">Remove</button>
+                    </div>
+                    <div class="cart-item-total">$${itemTotal.toFixed(2)}</div>
+                `;
+                cartItems.appendChild(div);
+            });
+
+            cartTotal.textContent = `$${total.toFixed(2)}`;
+        }
+
+        function updateQuantity(id, delta) {
+            const item = cart.find(i => i.id === id);
+            if (item) {
+                item.quantity += delta;
+                if (item.quantity <= 0) {
+                    removeItem(id);
+                } else {
+                    saveCart();
+                    updateCartUI();
+                }
+            }
+        }
+
+        function removeItem(id) {
+            cart = cart.filter(item => item.id !== id);
+            saveCart();
+            updateCartUI();
+            showNotification('Item removed from cart');
+        }
+
+        function showNotification(message) {
+            notification.textContent = message;
+            notification.style.display = 'block';
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 3000);
+        }
+
+        // Make functions available globally
+        window.addToCart = addToCart;
+        window.updateQuantity = updateQuantity;
+        window.removeItem = removeItem;
+    </script>
+
+    <!-- Add AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FEEDBACK</title>
+    <link rel="shortcut icon" href="IMAGES/LOGO.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <style>
+       /* Custom scrollbar styles */
+        ::-webkit-scrollbar {
+            width: 3px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #000;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #ffc107;
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ffd700;
+        }
+      body { background-color: black; color: white; }
+        /* === NAVBAR START === */
+        .a a:hover {
+            text-transform: uppercase;
+        }
+        .nav-link {
+            color: white !important;
+            transition: all 0.3s ease;
+        }
+        .nav-link:hover {
+            color: #ffc107 !important;
+            text-transform: uppercase;
+        }
+
+        /* Custom navbar toggler styles */
+        .navbar-toggler {
+            border: none;
+            padding: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-toggler:focus {
+            box-shadow: none;
+        }
+
+        .navbar-toggler.collapsed {
+            background-color: transparent;
+        }
+
+        .navbar-toggler:not(.collapsed) {
+            background-color: red !important;
+        }
+
+        /* Offcanvas menu styles */
+        .offcanvas {
+            background-color: black;
+            color: white;
+        }
+
+        .offcanvas-header {
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .offcanvas-body .nav-link {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* Mobile menu buttons */
+        .mobile-menu-buttons {
+            display: none;
+            padding: 1rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            margin-top: 1rem;
+        }
+
+        .mobile-menu-buttons .btn {
+            width: 100%;
+            margin-bottom: 0.5rem;
+        }
+
+        @media (max-width: 991.98px) {
+            .desktop-buttons {
+                display: none !important;
+            }
+            .mobile-menu-buttons {
+                display: block;
+            }
+        }
+        /* NAVBAR END */
+      /* FEEDBACK SEC START */
+        .feedbackheading h1 {
+            color: gold;
+            font-size: 35px;
+            cursor: pointer;
+            text-align: center;
+            padding-top: 50px;
+        }
+        .feedback-form {
+            background-color: black;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
+            margin: 0 auto;
+            width: 80%;
+            flex-grow: 1;
+            border: 1px solid gold;
+            
+        }
+        .feedback-form h2 {
+            text-align: center;
+            color: #ffc107;
+        }
+        .form-control {
+            background-color: #444;
+            border: 1px solid #666;
+            color: white;
+        }
+        .form-control:focus {
+            border-color: #ffc107;
+            box-shadow: 0 0 5px rgba(255, 193, 7, 0.5);
+        }
+        .rating-stars i {
+            font-size: 30px;
+            color: white;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        .rating-stars .filled {
+            color: #ffc107;
+        }
+        .btn-submit {
+            background-color: #ffc107;
+            border: none;
+            color: black;
+            padding: 12px 30px;
+            font-size: 16px;
+            width: 100%;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .btn-submit:hover {
+            background-color: #e0a800;
+        }
+       /* FEEDBACK SEC END */
+
+
+       /* FEEDBACK QUESTION START */
+        .questions h1 {
+            color: black;
+            font-size: 35px;
+            cursor: pointer;
+            text-align: center;
+            padding-top: 50px;
+        }
+        .accordion {
+            width: 80%;
+            margin: 0 auto;
+        }
+        .accordion-button {
+            background-color: black;
+            color: white;
+            border: 1px solid #ffc107;
+            transition: background-color 0.3s ease;
+        }
+        .accordion-button:not(.collapsed) {
+            background-color: #ffc107;
+            color: black;
+        }
+        .accordion-item {
+            margin-bottom: 10px;
+            background-color: white;
+            border: 1px solid #050505;
+        }
+        .accordion-body {
+            background-color: black;
+            color: white;
+        }
+        /* Responsive Design for Mobile & Tablets */
+        @media (max-width: 768px) {
+            .feedback-form {
+                width: 90%;
+            }
+            .accordion {
+                width: 100%;
+            }
+            .feedbackheading h1, .questions h1 {
+                font-size: 25px;
+            }
+        }
+        @media (max-width: 480px) {
+            .feedback-form {
+                width: 100%;
+                margin: 20px auto;
+            }
+            .btn-submit {
+                padding: 10px;
+                font-size: 14px;
+            }
+            .social-icons a {
+                font-size: 1.2rem;
+            }
+        }
+       /* FEEDBACK QUESTION END */
+
+
+        /* FOOTER START */
+.footer {
+background-color: red;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+ background-color: red;
+}
+
+.footer a {
+  color: white;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.footer a:hover {
+  color: #ffc107;
+  text-decoration: underline;
+}
+
+.social-icons a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: red;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.social-icons a:hover {
+  background-color: #ffc107;
+  color: red !important;
+  transform: translateY(-3px);
+}
+
+/* FOOTER END */
+
+
+    </style>
+</head>
+<body>
+   <!-- Navbar Start -->
+    <nav class="navbar navbar-expand-lg navbar-dark position-sticky top-0" style="z-index: 2; background-color: red;">
+        <div class="container-fluid">
+            <div style="padding-right: 50px;" class="img">
+                <img src="IMAGES/LOGO.png" alt="Logo" height="60px">
+            </div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="a" class="nav-item"><a class="nav-link active" aria-current="page" href="index.html">Home</a></li>
+                    <li class="a" class="nav-item"><a class="nav-link text-white" href="about.html">About Us</a></li>
+                    <li class="a" class="nav-item"><a class="nav-link text-white" href="contact.html">Contact Us</a></li>
+                    <li class="a" class="nav-item"><a class="nav-link text-white" href="feedback.html">Feedback</a></li>
+                    <li class="a" class="nav-item"><a class="nav-link text-white" href="gallery.html">Gallery</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="showall.html">Show All</a>
+                    </li>
+                </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Offcanvas Sidebar Menu -->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+                <li class="nav-item"><a class="nav-link" href="contact.html">Contact Us</a></li>
+                <li class="nav-item"><a class="nav-link" href="feedback.html">Feedback</a></li>
+                <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+                <li class="nav-item"><a class="nav-link" href="showall.html">Show All</a></li>
+            </ul>
+            
+            <!-- Mobile Menu Buttons -->
+        </div>
+    </div>
+    <!-- Navbar End -->
+
+<!-- Main Content -->
+<div class="heading feedbackheading"><h1>Feedback Form</h1></div>
+<div class="container feedback-container">
+  <div class="feedback-form">
+    <h2>We Value Your Feedback</h2>
+    <form>
+      <div class="mb-3">
+        <label for="message" class="form-label">Your Message</label>
+        <textarea class="form-control" id="message" rows="5" placeholder="Write your feedback here..."></textarea>
+      </div>
+      <div class="mb-3">
+        <label for="rating" class="form-label">Rate Us</label>
+        <div class="rating-stars">
+          <i class="fa fa-star" data-index="1" onclick="setRating(1)"></i>
+          <i class="fa fa-star" data-index="2" onclick="setRating(2)"></i>
+          <i class="fa fa-star" data-index="3" onclick="setRating(3)"></i>
+          <i class="fa fa-star" data-index="4" onclick="setRating(4)"></i>
+          <i class="fa fa-star" data-index="5" onclick="setRating(5)"></i>
+        </div>
+        <input type="hidden" id="rating" value="0">
+      </div>
+      <button type="button" class="btn-submit" onclick="submitFeedback()">Submit Feedback</button>
+    </form>
+  </div>
+</div>
+
+<!-- Frequently Asked heading -->
+ <div style="background-color: #050505;">
+<div style="background-color: #050505;" class="heading questions">
+    <h1 style="color: gold;" >Frequently Asked Questions</h1>
+</div>
+
+
+    <!-- Frequently Asked heading -->
+    <div class="accordion" id="accordionExample">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    What is the purpose of this form?
+                </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    This form is used to gather feedback from users regarding our service. We value your input to improve.
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    How do I submit feedback?
+                </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    Simply fill out the form with your message and rating, then press the submit button.
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingThree">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    Can I rate anonymously?
+                </button>
+            </h2>
+            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    Yes, you can leave feedback without providing any personal information.
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingFour">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                    Can I edit my feedback after submission?
+                </button>
+            </h2>
+            <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    Once feedback is submitted, it cannot be edited. If you need to change something, you can contact our support team.
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingFive">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                    How is my feedback used?
+                </button>
+            </h2>
+            <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    Your feedback helps us understand your experience with our service and allows us to make necessary improvements.
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <br>
+     <br>
+ 
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container py-5">
+    <div class="row">
+      <div class="col-md-4 text-center text-md-start mb-4">
+        <img src="IMAGES/LOGO.png" alt="Logo" height="80px">
+        <p class="mt-3">Delicious food made with passion and tradition.</p>
+      </div>
+      <div class="col-md-4 text-center">
+        <h5 style="color: #ffc107;">Quick Links</h5>
+        <ul class="list-unstyled">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="col-md-4 text-center text-md-end">
+        <h5 style="color: #ffc107;">Connect With Us</h5>
+        <p><i class="fas fa-phone me-2"></i><a href="tel:+1234567890">+123 456 7890</a></p>
+        <p><i class="fas fa-envelope me-2"></i><a href="mailto:info@easyeat.com">info@easyeat.com</a></p>
+      </div>
+    </div>
+    <hr class="my-4">
+    <div class="text-center">
+      <p class="mb-0">&copy; 2025 easyeat.com | All Rights Reserved</p>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  function setRating(starIndex) {
+    const stars = document.querySelectorAll('.rating-stars i');
+    const ratingInput = document.getElementById('rating');
+    ratingInput.value = starIndex;
+    stars.forEach((star, index) => {
+      star.classList.toggle('filled', index < starIndex);
+    });
+  }
+  function submitFeedback() {
+    const rating = document.getElementById('rating').value;
+    const message = document.getElementById('message').value;
+    if (rating === '0' || message === '') {
+      alert('Please provide a rating and a message.');
+    } else {
+      alert(`Thank you for your feedback! Rating: ${rating}, Message: ${message}`);
+    }
+  }
+</script>
+</body>
+</html>
+
