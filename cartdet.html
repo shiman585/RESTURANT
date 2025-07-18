@@ -29,6 +29,7 @@
       color: var(--text);
       min-height: 100vh;
       padding-bottom: 20px;
+      transition: all 0.3s ease;
     }
 
     .checkout-header {
@@ -40,6 +41,7 @@
       position: sticky;
       top: 0;
       z-index: 1000;
+      transition: all 0.3s ease;
     }
 
     .checkout-container {
@@ -55,6 +57,7 @@
       padding: 25px;
       margin-bottom: 25px;
       border: 1px solid white;
+      transition: all 0.3s ease;
     }
 
     .card-title {
@@ -66,11 +69,13 @@
       border-bottom: 1px solid var(--border);
       display: flex;
       align-items: center;
+      transition: all 0.3s ease;
     }
 
     .card-title i {
       margin-right: 10px;
       color: var(--primary);
+      transition: all 0.3s ease;
     }
 
     .form-control {
@@ -80,6 +85,7 @@
       border-radius: 6px;
       padding: 10px 15px;
       font-size: 0.95rem;
+      transition: all 0.3s ease;
     }
 
     .form-control:focus {
@@ -92,6 +98,7 @@
       font-size: 0.9rem;
       color: var(--text-light);
       margin-bottom: 8px;
+      transition: all 0.3s ease;
     }
 
     .required { color: var(--danger); }
@@ -126,6 +133,7 @@
       right: 0;
       height: 1px;
       background-color: var(--border);
+      transition: all 0.3s ease;
     }
 
     .step {
@@ -146,10 +154,11 @@
       justify-content: center;
       font-weight: 600;
       margin-bottom: 8px;
+      transition: all 0.3s ease;
     }
 
     .step.active .step-number { background-color: var(--primary); color: white; }
-    .step-label { font-size: 0.85rem; color: var(--text-light); font-weight: 500; text-align: center; }
+    .step-label { font-size: 0.85rem; color: var(--text-light); font-weight: 500; text-align: center; transition: all 0.3s ease; }
     .step.active .step-label { color: var(--primary); font-weight: 600; }
 
     .cart-item {
@@ -168,18 +177,20 @@
       border-radius: 6px;
       border: 1px solid var(--border-light);
     }
- .checkout-btn {
-            width: 100%;
-            padding: 12px;
-            background-color: red;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            margin-top: 20px;
-        }
+    
+    .checkout-btn {
+      width: 100%;
+      padding: 12px;
+      background-color: red;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      margin-top: 20px;
+    }
+    
     .summary-row, .summary-total {
       display: flex;
       justify-content: space-between;
@@ -189,6 +200,94 @@
     .summary-total {
       font-weight: bold;
       font-size: 1.1rem;
+    }
+
+    /* Theme Toggle Button */
+    .theme-toggle {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .theme-toggle:hover {
+      background-color: rgba(255,255,255,0.1);
+    }
+
+    /* Day Theme Styles */
+    body.day-theme {
+      background-color: white;
+      color: black;
+    }
+    
+    .day-theme .checkout-card {
+      background-color: white !important;
+      border: 1px solid #ddd !important;
+      color: black;
+    }
+    
+    .day-theme .form-control {
+      background-color: #f8f9fa !important;
+      color: black !important;
+      border: 1px solid #ced4da !important;
+    }
+    
+    .day-theme .form-control:focus {
+      background-color: white !important;
+    }
+    
+    .day-theme .form-label {
+      color: #495057 !important;
+    }
+    
+    .day-theme .checkout-header {
+      background-color: red !important;
+      border-bottom: 1px solid #ddd !important;
+    }
+    
+    .day-theme .step-label {
+      color: #495057 !important;
+    }
+    
+    .day-theme .step.active .step-label {
+      color: red !important;
+    }
+    
+    .day-theme .step-number {
+      background-color: #ddd !important;
+      color: #495057 !important;
+    }
+    
+    .day-theme .step.active .step-number {
+      background-color: red !important;
+      color: white !important;
+    }
+    
+    .day-theme .checkout-steps::before {
+      background-color: #ddd !important;
+    }
+    
+    .day-theme .summary-row, 
+    .day-theme .summary-total {
+      color: black !important;
+    }
+    
+    .day-theme .card-title {
+      color: red !important;
+      border-bottom: 1px solid #ddd !important;
+    }
+    
+    .day-theme .card-title i {
+      color: red !important;
+    }
+    
+    .day-theme .theme-toggle {
+      border: 1px solid red !important;
+      color: red !important;
     }
 
     @media (max-width: 991.98px) {
@@ -203,9 +302,12 @@
       <a href="javascript:history.back()" class="btn btn-outline-danger rounded-circle">
         <i class="fas fa-arrow-left"></i>
       </a>
-      <a class="navbar-brand" href="index.html">
-        <img src="IMAGES/LOGO.png"  alt="EasyEat Logo" height="40">
-      </a>
+      <div class="d-flex align-items-center">
+        <a class="navbar-brand" href="index.html">
+          <img src="IMAGES/LOGO.png" alt="EasyEat Logo" height="40">
+        </a>
+       
+      </div>
     </div>
   </header >
 
@@ -267,84 +369,81 @@
             <div class="summary-total"><span>Total:</span><span id="total">$0.00</span></div>
           </div>
   
-
-<button id="continueToPaymentBtn" type="button" class="btn btn-checkout w-100 mt-3 d-block text-center text-white text-decoration-none">
-  Continue to Payment
-</button>
-
-
+          <button id="continueToPaymentBtn" type="button" class="btn btn-checkout w-100 mt-3 d-block text-center text-white text-decoration-none">
+            Continue to Payment
+          </button>
         </div>
       </div>
     </div>
   </div>
 
-  
   <script>
-  function loadCartItems() {
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const container = document.getElementById('orderItemsContainer');
-    let subtotal = 0;
+    function loadCartItems() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const container = document.getElementById('orderItemsContainer');
+      let subtotal = 0;
 
-    if (cart.length === 0) {
-      container.innerHTML = `<div class="text-center py-4"><i class="fas fa-shopping-cart fa-2"></i><p>Your cart is empty</p><a href="index.html" class="btn btn-sm btn-outline-danger">Browse Menu</a></div>`;
-      document.getElementById('continueToPaymentBtn').disabled = true;
-      return;
-    }
-
-    container.innerHTML = '';
-    cart.forEach(item => {
-      const itemTotal = item.price * item.quantity;
-      subtotal += itemTotal;
-
-      const itemElement = document.createElement('div');
-      itemElement.className = 'cart-item';
-      itemElement.innerHTML = `
-        <img src="${item.img}" class="cart-item-img" alt="${item.title}">
-        <div class="flex-grow-1">
-          <h6 class="mb-1">${item.title}</h6>
-          <p class="">$${item.price.toFixed(2)} × ${item.quantity}</p>
-          <p class="mb-0 fw-bold">$${itemTotal.toFixed(2)}</p>
-        </div>
-      `;
-      container.appendChild(itemElement);
-    });
-
-    document.getElementById('subtotal').textContent = `$${subtotal.toFixed(2)}`;
-    document.getElementById('tax').textContent = `$${(subtotal * 0.1).toFixed(2)}`;
-    document.getElementById('total').textContent = `$${(subtotal + 2.99 + subtotal * 0.1).toFixed(2)}`;
-  }
-
-  document.addEventListener('DOMContentLoaded', () => {
-    loadCartItems();
-
-    const btn = document.getElementById('continueToPaymentBtn');
-    const form = document.getElementById('deliveryForm');
-
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-
-      form.classList.remove('was-validated');
-
-      if (!form.checkValidity()) {
-        form.classList.add('was-validated');
+      if (cart.length === 0) {
+        container.innerHTML = `<div class="text-center py-4"><i class="fas fa-shopping-cart fa-2"></i><p>Your cart is empty</p><a href="index.html" class="btn btn-sm btn-outline-danger">Browse Menu</a></div>`;
+        document.getElementById('continueToPaymentBtn').disabled = true;
         return;
       }
 
-      const deliveryInfo = {
-        firstName: document.getElementById('firstName').value.trim(),
-        lastName: document.getElementById('lastName').value.trim(),
-        address: document.getElementById('address').value.trim(),
-        city: document.getElementById('city').value.trim(),
-        phone: document.getElementById('phone').value.trim(),
-        instructions: document.getElementById('instructions').value.trim()
-      };
+      container.innerHTML = '';
+      cart.forEach(item => {
+        const itemTotal = item.price * item.quantity;
+        subtotal += itemTotal;
 
-      localStorage.setItem('deliveryInfo', JSON.stringify(deliveryInfo));
+        const itemElement = document.createElement('div');
+        itemElement.className = 'cart-item';
+        itemElement.innerHTML = `
+          <img src="${item.img}" class="cart-item-img" alt="${item.title}">
+          <div class="flex-grow-1">
+            <h6 class="mb-1">${item.title}</h6>
+            <p class="">$${item.price.toFixed(2)} × ${item.quantity}</p>
+            <p class="mb-0 fw-bold">$${itemTotal.toFixed(2)}</p>
+          </div>
+        `;
+        container.appendChild(itemElement);
+      });
 
-      window.location.href = 'cartpay.html';
+      document.getElementById('subtotal').textContent = `$${subtotal.toFixed(2)}`;
+      document.getElementById('tax').textContent = `$${(subtotal * 0.1).toFixed(2)}`;
+      document.getElementById('total').textContent = `$${(subtotal + 2.99 + subtotal * 0.1).toFixed(2)}`;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadCartItems();
+
+      const btn = document.getElementById('continueToPaymentBtn');
+      const form = document.getElementById('deliveryForm');
+
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        form.classList.remove('was-validated');
+
+        if (!form.checkValidity()) {
+          form.classList.add('was-validated');
+          return;
+        }
+
+        const deliveryInfo = {
+          firstName: document.getElementById('firstName').value.trim(),
+          lastName: document.getElementById('lastName').value.trim(),
+          address: document.getElementById('address').value.trim(),
+          city: document.getElementById('city').value.trim(),
+          phone: document.getElementById('phone').value.trim(),
+          instructions: document.getElementById('instructions').value.trim()
+        };
+
+        localStorage.setItem('deliveryInfo', JSON.stringify(deliveryInfo));
+
+        window.location.href = 'cartpay.html';
+      });
     });
-  });
-</script>
-
+  </script>
+  
+  <script src="theme.js"></script>
 </body>
 </html>

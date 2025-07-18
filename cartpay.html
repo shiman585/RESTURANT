@@ -23,13 +23,42 @@
             --danger: #dc3545; /* Keeping as is */
         }
 
+        /* Day theme variables */
+        :root[data-theme="day"] {
+            --primary: #ff0000; /* Red */
+            --primary-light: #ff4d4d; /* Lighter Red */
+            --secondary: #ffffff; /* White background */
+            --secondary-light: #f8f9fa; /* Slightly off-white */
+            --accent: red; /* White */
+            --text: #000000; /* Black text */
+            --text-light: #6c757d; /* Dark gray text */
+            --border: #dee2e6; /* Light gray borders */
+            --border-light: #ced4da; /* Lighter gray border */
+            --card-bg: #ffffff; /* Card background */
+        }
+
+        /* Night theme variables */
+        :root[data-theme="night"] {
+            --primary: #ff0000; /* Red */
+            --primary-light: #ff4d4d; /* Lighter Red */
+            --secondary: black; /* Dark background */
+            --secondary-light: black; /* Slightly lighter dark */
+            --accent: #000000; /* Black */
+            --text: #ffffff; /* White text */
+            --text-light: #b3b3b3; /* Light gray text */
+            --border: white; /* Dark gray borders */
+            --border-light: black; /* Lighter dark gray border */
+            --card-bg: black; /* Card background */
+        }
+
         body {
-            background-color:black;
+            background-color: var(--secondary);
             font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
             color: var(--text);
             min-height: 100vh;
             line-height: 1.6;
             padding-bottom: 20px;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
         
         /* Header Styles */
@@ -42,6 +71,7 @@
             position: sticky;
             top: 0;
             z-index: 1000;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
         }
         
         .checkout-container {
@@ -53,12 +83,13 @@
         
         /* Card Styles */
         .checkout-card {
-            background-color: black;
+            background-color: var(--card-bg);
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
             padding: 25px;
             margin-bottom: 25px;
-            border: 1px solid white;
+            border: 1px solid var(--border);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
         }
         
         .card-title {
@@ -70,6 +101,7 @@
             border-bottom: 1px solid var(--border);
             display: flex;
             align-items: center;
+            transition: color 0.3s ease, border-color 0.3s ease;
         }
         
         .card-title i {
@@ -80,12 +112,13 @@
         
         /* Form Styles */
         .form-control {
-            background-color: black;
+            background-color: var(--card-bg);
             border: 1px solid var(--border);
             color: var(--text);
             border-radius: 6px;
             padding: 10px 15px;
             font-size: 0.95rem;
+            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
         }
         
         .form-control:focus {
@@ -100,6 +133,7 @@
             font-size: 0.9rem;
             color: var(--text-light);
             margin-bottom: 8px;
+            transition: color 0.3s ease;
         }
         
         .required {
@@ -130,6 +164,7 @@
             margin-bottom: 15px;
             padding-bottom: 15px;
             border-bottom: 1px solid var(--border);
+            transition: border-color 0.3s ease;
         }
         
         .cart-item-img {
@@ -139,6 +174,7 @@
             border-radius: 6px;
             margin-right: 15px;
             border: 1px solid var(--border);
+            transition: border-color 0.3s ease;
         }
         
         /* Order Summary Styles */
@@ -147,6 +183,7 @@
             border-radius: 8px;
             padding: 20px;
             border: 1px solid var(--border);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
         }
         
         .summary-row {
@@ -155,6 +192,7 @@
             margin-bottom: 10px;
             font-size: 0.95rem;
             color: var(--text);
+            transition: color 0.3s ease;
         }
         
         .summary-total {
@@ -164,6 +202,7 @@
             padding-top: 15px;
             border-top: 1px solid var(--primary);
             color: var(--text);
+            transition: color 0.3s ease, border-color 0.3s ease;
         }
         
         /* Payment Method Styles */
@@ -174,6 +213,7 @@
             padding: 15px;
             margin-bottom: 15px;
             background: var(--card-bg);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
         }
         
         .payment-card:hover {
@@ -199,6 +239,7 @@
             background: var(--secondary-light);
             border-radius: 6px;
             border: 1px solid var(--border);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
         }
         
         .credit-card-form.active {
@@ -239,6 +280,7 @@
             height: 1px;
             background-color: var(--border);
             z-index: 1;
+            transition: background-color 0.3s ease;
         }
         
         .step {
@@ -260,6 +302,7 @@
             justify-content: center;
             font-weight: 600;
             margin-bottom: 8px;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
         
         .step.active .step-number {
@@ -283,6 +326,7 @@
             color: var(--text-light);
             font-weight: 500;
             text-align: center;
+            transition: color 0.3s ease;
         }
         
         .step.active .step-label {
@@ -312,14 +356,30 @@
         
         /* Success Modal */
         .modal-success .modal-content {
-            background-color: red;
+            background-color: var(--card-bg);
             border-radius: 8px;
+            border: 1px solid var(--border);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
         }
         
         .success-icon {
             font-size: 4rem;
             color: var(--success);
             margin-bottom: 20px;
+        }
+        
+        /* Theme Toggle Button */
+        .theme-toggle {
+            border: 1px solid var(--border) !important;
+            color: var(--text) !important;
+            background-color: var(--card-bg) !important;
+            transition: all 0.3s ease;
+        }
+        
+        .theme-toggle:hover {
+            background-color: var(--primary) !important;
+            color: white !important;
+            border-color: var(--primary) !important;
         }
         
         /* Responsive Adjustments */
@@ -360,6 +420,14 @@
                 margin-right: 0;
             }
         }
+        #themeToggle {
+  position: absolute !important;
+  left: -9999px !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+}
+
     </style>
 </head>
 <body>
@@ -385,7 +453,12 @@ onmouseout="this.style.backgroundColor=''; this.style.color='var(--primary)';">
     <i class="fas fa-arrow-left"></i>
 </a>
 
-               <a class="navbar-brand" href="index.html">
+               <!-- Theme Toggle Button -->
+    <button id="themeToggle" class="btn btn-sm theme-toggle">
+        <i class="fas fa-moon" id="themeIcon"></i>
+    </button>
+    &nbsp;
+    <a class="navbar-brand" href="index.html">
     <img src="IMAGES/LOGO.png" alt="EasyEat Logo" height="40">
 </a>
 
@@ -424,7 +497,7 @@ onmouseout="this.style.backgroundColor=''; this.style.color='var(--primary)';">
                                 <i class="payment-icon fas fa-money-bill-wave"></i>
                                 <div>
                                     <h6 class="mb-0" style="font-size: 1rem;">Cash on Delivery</h6>
-                                    <small >Pay when you receive your order</small>
+                                    <small style="color: var(--text-light);">Pay when you receive your order</small>
                                 </div>
                             </label>
                         </div>
@@ -437,7 +510,7 @@ onmouseout="this.style.backgroundColor=''; this.style.color='var(--primary)';">
                                 <i class="payment-icon far fa-credit-card"></i>
                                 <div>
                                     <h6 class="mb-0" style="font-size: 1rem;">Credit/Debit Card</h6>
-                                    <small >Secure payment with your card</small>
+                                    <small style="color: var(--text-light);">Secure payment with your card</small>
                                 </div>
                             </label>
                         </div>
@@ -462,7 +535,7 @@ onmouseout="this.style.backgroundColor=''; this.style.color='var(--primary)';">
                                 <div class="input-group">
                                     <input type="text" class="form-control" id="cvv" placeholder="123" pattern="\d{3,4}" required>
                                     <span class="input-group-text bg-transparent" style="cursor: pointer;" id="cvvHelp">
-                                        <i class="fas fa-question-circle text-muted"></i>
+                                        <i class="fas fa-question-circle" style="color: var(--text-light);"></i>
                                     </span>
                                 </div>
                                 <div class="invalid-feedback">Please enter 3 or 4 digit CVV</div>
@@ -511,7 +584,7 @@ onmouseout="this.style.backgroundColor=''; this.style.color='var(--primary)';">
                     </button>
                     
                     <div class="text-center mt-3">
-                        <small >
+                        <small style="color: var(--text-light);">
                             <i class="fas fa-shield-alt me-1"></i> Secure checkout
                         </small>
                     </div>
@@ -522,33 +595,81 @@ onmouseout="this.style.backgroundColor=''; this.style.color='var(--primary)';">
 
     <!-- Success Modal -->
     <div class="modal fade" id="successModal" tabindex="-1" aria-hidden="true">
-        <div  class="modal-dialog modal-dialog-centered">
-            <div style="background-color: black;color: white;" class="modal-content">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content" style="background-color: var(--card-bg); color: var(--text); border: 1px solid var(--border);">
                 <div class="modal-header border-0">
                     <h5 class="modal-title">Order Confirmed!</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="filter: invert(1);"></button>
                 </div>
                 <div class="modal-body text-center py-4">
                     <div class="success-icon">
                         <i class="fas fa-check-circle"></i>
                     </div>
                     <h4 class="mb-3">Thank you for your order!</h4>
-                    <p>Your delicious food is being prepared and will arrive soon.</p>
+                    <p style="color: var(--text-light);">Your delicious food is being prepared and will arrive soon.</p>
                     <p class="mb-4">Order ID: <strong>#<span id="orderId"></span></strong></p>
-                    <button style="background-color: gold;color: black;" class="btn btn-gold" onclick="window.location.href='index.html'">
+                    <button style="background-color: var(--primary); color: white;" class="btn" onclick="window.location.href='index.html'">
                         <i class="fas fa-home me-2"></i> Back to Home
                     </button>
                 </div>
                 <div class="modal-footer border-0 justify-content-center">
-                    <small  >Estimated delivery time: <span id="deliveryTime"></span></small>
+                    <small style="color: var(--text-light);">Estimated delivery time: <span id="deliveryTime"></span></small>
                 </div>
             </div>
         </div>
     </div>
 
- 
-
     <script>
+        // Theme Toggle Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeToggle = document.getElementById('themeToggle');
+            const themeIcon = document.getElementById('themeIcon');
+            const html = document.documentElement;
+            
+            // Check for saved theme preference or use preferred color scheme
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            
+            // Set initial theme
+            if (savedTheme) {
+                html.setAttribute('data-theme', savedTheme);
+                updateThemeIcon(savedTheme);
+            } else {
+                const initialTheme = prefersDark ? 'night' : 'day';
+                html.setAttribute('data-theme', initialTheme);
+                updateThemeIcon(initialTheme);
+            }
+            
+            // Toggle theme on button click
+            themeToggle.addEventListener('click', function() {
+                const currentTheme = html.getAttribute('data-theme');
+                const newTheme = currentTheme === 'day' ? 'night' : 'day';
+                
+                html.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                updateThemeIcon(newTheme);
+            });
+            
+            function updateThemeIcon(theme) {
+                if (theme === 'day') {
+                    themeIcon.classList.remove('fa-sun');
+                    themeIcon.classList.add('fa-moon');
+                } else {
+                    themeIcon.classList.remove('fa-moon');
+                    themeIcon.classList.add('fa-sun');
+                }
+            }
+            
+            // Load cart items and setup other functionality
+            loadCartItems();
+            setupPaymentMethods();
+            setupFormValidation();
+            
+            // Mark second step as active
+            document.querySelectorAll('.step')[1].classList.add('active');
+            document.querySelectorAll('.step')[0].classList.add('completed');
+        });
+        
         // Load cart items from localStorage
         function loadCartItems() {
             const cart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -558,8 +679,8 @@ onmouseout="this.style.backgroundColor=''; this.style.color='var(--primary)';">
             if (cart.length === 0) {
                 container.innerHTML = `
                     <div class="text-center py-4">
-                        <i class="fas fa-shopping-cart fa-2x mb-3 text-muted"></i>
-                        <p>Your cart is empty</p>
+                        <i class="fas fa-shopping-cart fa-2x mb-3" style="color: var(--text-light);"></i>
+                        <p style="color: var(--text-light);">Your cart is empty</p>
                         <a href="index.html" class="btn btn-sm btn-outline-danger">Browse Menu</a>
                     </div>
                 `;
@@ -580,7 +701,7 @@ onmouseout="this.style.backgroundColor=''; this.style.color='var(--primary)';">
                     <img src="${item.img}" class="cart-item-img" alt="${item.title}">
                     <div class="flex-grow-1">
                         <h6 class="mb-1" style="font-size: 1rem;">${item.title}</h6>
-                        <p class="mb-1 " style="font-size: 0.9rem;">$${item.price.toFixed(2)} × ${item.quantity}</p>
+                        <p class="mb-1" style="color: var(--text-light); font-size: 0.9rem;">$${item.price.toFixed(2)} × ${item.quantity}</p>
                         <p class="mb-0 fw-bold" style="font-size: 0.95rem;">$${itemTotal.toFixed(2)}</p>
                     </div>
                 `;
@@ -760,17 +881,6 @@ onmouseout="this.style.backgroundColor=''; this.style.color='var(--primary)';">
                 step.classList.add('completed');
             });
         }
-        
-        // Initialize everything when page loads
-        document.addEventListener('DOMContentLoaded', function() {
-            loadCartItems();
-            setupPaymentMethods();
-            setupFormValidation();
-            
-            // Mark second step as active
-            document.querySelectorAll('.step')[1].classList.add('active');
-            document.querySelectorAll('.step')[0].classList.add('completed');
-        });
     </script>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

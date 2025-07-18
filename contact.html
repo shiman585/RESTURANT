@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,75 +23,128 @@
             background: #ffd700;
         }
     body { background-color: black; color: white; }
-      /* === NAVBAR START === */
-        .a a:hover {
-            text-transform: uppercase;
-        }
-        .nav-link {
-            color: white !important;
-            transition: all 0.3s ease;
-        }
-        .nav-link:hover {
-            color: #ffc107 !important;
-            text-transform: uppercase;
-        }
+    
+    /* === DAY THEME STYLES === */
+    body.day-theme {
+        background-color: white;
+        color: black;
+    }
+    /* Add this to your CSS */
+.btn-close {
+    filter: invert(1) !important;
+}
 
-        /* Custom navbar toggler styles */
-        .navbar-toggler {
-            border: none;
-            padding: 0.5rem;
-            transition: all 0.3s ease;
-        }
+.day-theme .btn-close {
+    filter: invert(0) !important;
+}
+    .day-theme .contact-form {
+        background: linear-gradient(150deg, red 50%, white 50%);
+    }
+    
+    .day-theme .contact-details {
+        background: linear-gradient(120deg, white 50%, red 50%);
+    }
+    
+    .day-theme .form-control {
+        background-color: white;
+        color: black;
+    }
+    
+    .day-theme ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+    
+    .day-theme ::-webkit-scrollbar-thumb {
+        background: red;
+    }
+    
+    /* === NAVBAR START === */
+    .a a:hover {
+        text-transform: uppercase;
+    }
+    .nav-link {
+        color: white !important;
+        transition: all 0.3s ease;
+    }
+    .nav-link:hover {
+        color: #ffc107 !important;
+        text-transform: uppercase;
+    }
 
-        .navbar-toggler:focus {
-            box-shadow: none;
-        }
+    /* Custom navbar toggler styles */
+    .navbar-toggler {
+        border: none;
+        padding: 0.5rem;
+        transition: all 0.3s ease;
+    }
 
-        .navbar-toggler.collapsed {
-            background-color: transparent;
-        }
+    .navbar-toggler:focus {
+        box-shadow: none;
+    }
 
-        .navbar-toggler:not(.collapsed) {
-            background-color: red !important;
-        }
+    .navbar-toggler.collapsed {
+        background-color: transparent;
+    }
 
-        /* Offcanvas menu styles */
-        .offcanvas {
-            background-color: black;
-            color: white;
-        }
+    .navbar-toggler:not(.collapsed) {
+        background-color: red !important;
+    }
 
-        .offcanvas-header {
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
+    /* Offcanvas menu styles */
+    .offcanvas {
+        background-color: black;
+        color: white;
+    }
+    
+    .day-theme .offcanvas {
+        background-color: white !important;
+        color: black !important;
+    }
 
-        .offcanvas-body .nav-link {
-            padding: 0.5rem 0;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
+    .offcanvas-header {
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .day-theme .offcanvas-header {
+        border-bottom-color: rgba(0,0,0,0.1) !important;
+    }
 
-        /* Mobile menu buttons */
+    .offcanvas-body .nav-link {
+        padding: 0.5rem 0;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .day-theme .offcanvas-body .nav-link {
+        border-bottom-color: rgba(0,0,0,0.1) !important;
+        color: black !important;
+    }
+
+    /* Mobile menu buttons */
+    .mobile-menu-buttons {
+        display: none;
+        padding: 1rem;
+        border-top: 1px solid rgba(255,255,255,0.1);
+        margin-top: 1rem;
+    }
+    
+    .day-theme .mobile-menu-buttons {
+        border-top-color: rgba(0,0,0,0.1) !important;
+    }
+
+    .mobile-menu-buttons .btn {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+
+    @media (max-width: 991.98px) {
+        .desktop-buttons {
+            display: none !important;
+        }
         .mobile-menu-buttons {
-            display: none;
-            padding: 1rem;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            margin-top: 1rem;
+            display: block;
         }
-
-        .mobile-menu-buttons .btn {
-            width: 100%;
-            margin-bottom: 0.5rem;
-        }
-
-        @media (max-width: 991.98px) {
-            .desktop-buttons {
-                display: none !important;
-            }
-            .mobile-menu-buttons {
-                display: block;
-            }
-        }
-        /* NAVBAR END */
+    }
+    /* NAVBAR END */
 
     .contact-form {
       background: linear-gradient(150deg, orange 50%, black 50%);
@@ -116,10 +168,33 @@
     .social-icons a:hover {
       background-color: #ffc107; color: red !important;
     }
+    /* buttton theme start */
+  .theme-toggle {
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  font-weight: bold;
+  padding: 8px 18px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+.theme-toggle:hover {
+  transform: scale(1.05);
+  background-color: red;
+}
+
+.day-theme .theme-toggle {
+  background-color: red;
+  color: black;
+}
+/* button theme end */
   </style>
 </head>
 <body>
-
 
    <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg navbar-dark position-sticky top-0" style="z-index: 2; background-color: red;">
@@ -141,6 +216,11 @@
                         <a class="nav-link" href="showall.html">Show All</a>
                     </li>
                 </ul>
+                <div class="desktop-buttons d-flex align-items-center">
+                    <!-- Dark/Light Mode Toggle -->
+                    <button  id="theme-toggle" class="theme-toggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
                 </div>
             </div>
         </div>
@@ -163,6 +243,11 @@
             </ul>
             
             <!-- Mobile Menu Buttons -->
+            <div class="mobile-menu-buttons">
+                <button  id="theme-toggle" class="theme-toggle">
+                    <i class="fas fa-moon me-2"></i> 
+                </button>
+            </div>
         </div>
     </div>
     <!-- Navbar End -->
@@ -217,35 +302,50 @@
     </div>
   </div>
 </div>
-
-<!-- Footer -->
-<footer class="footer">
-  <div class="container text-center">
-    <div class="row">
-      <div class="col-md-4 text-center text-md-start mb-4 mb-md-0">
-        <img src="IMAGES/LOGO.png" alt="Logo" height="80px">
-        <p class="mt-3" style="font-size: 0.9rem;">Delicious food made with passion and tradition.</p>
-      </div>
-      <div class="col-md-4">
-        <h5 style="color: #ffc107;">Quick Links</h5>
-        <ul class="list-unstyled">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About Us</a></li>
-          <li><a href="gallery.html">Gallery</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </div>
-      <div class="col-md-4 text-md-end">
-        <h5 style="color: #ffc107;">Connect With Us</h5>
-        <p><i class="fas fa-phone me-2"></i><a href="tel:+1234567890">+123 456 7890</a></p>
-        <p><i class="fas fa-envelope me-2"></i><a href="mailto:info@easyeat.com">info@easyeat.com</a></p>
+<!-- FOOTER START -->
+  <footer class="footer">
+    <div class="container py-5">
+      <div class="row">
+        <div class="col-md-4 text-center text-md-start mb-4 mb-md-0">
+          <img src="IMAGES/LOGO.png" alt="Logo" height="80px">
+        </div>
+        
+        <div class="col-md-4 text-center mb-4 mb-md-0">
+          <h5 class="mb-4" style="color: #ffc107;">Quick Links</h5>
+          <ul class="list-unstyled">
+            <li class="mb-2"><a href="index.html" class="text-white text-decoration-none">Home</a></li>
+            <li class="mb-2"><a href="about.html" class="text-white text-decoration-none">About Us</a></li>
+            <li class="mb-2"><a href="gallery.html" class="text-white text-decoration-none">Gallery</a></li>
+            <li class="mb-2"><a href="contact.html" class="text-white text-decoration-none">Contact</a></li>
+          </ul>
+        </div>
+        
+        <div class="col-md-4 text-center text-md-end">
+          <h5 class="mb-4" style="color: #ffc107;">Connect With Us</h5>
+          <div class="contact-info">
+            <p class="mb-3">
+              <i class="fas fa-phone me-2 text-white"></i> 
+              <a href="tel:+1234567890" class="text-white text-decoration-none">+123 456 7890</a>
+            </p>
+            <p class="mb-4">
+              <i class="fas fa-envelope me-2 text-white"></i> 
+              <a href="mailto:info@easyeat.com" class="text-white text-decoration-none">info@easyeat.com</a>
+            </p>
+          </div>
+          <div class="social-icons">
+            <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+          <hr class="my-2" style="border-color: red;">
       </div>
     </div>
-    <hr style="border-color: black;">
-    <p class="mb-0" style="font-size: 0.8rem;">&copy; 2025 easyeat.com | All Rights Reserved</p>
-  </div>
-</footer>
+  </footer>
+  <!-- FOOTER END -->
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="theme.js"></script>
 </body>
 </html>
